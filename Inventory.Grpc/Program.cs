@@ -14,6 +14,7 @@ try
 // Add services to the container.
     builder.Services.AddGrpc();
     builder.Services.AddInfrastructureServices();
+    builder.Services.AddInfrastructureConfigure(builder.Configuration);
     builder.Services.ConfigureMongoDb();
     var app = builder.Build();
 

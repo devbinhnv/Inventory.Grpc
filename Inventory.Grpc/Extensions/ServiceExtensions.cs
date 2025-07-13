@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Extensions;
 using Inventory.Grpc.Repositories;
 using Inventory.Grpc.Repositories.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using Shared.Configurations;
 
@@ -12,6 +13,13 @@ public static class ServiceExtensions
     {
         services.AddScoped<IInventoryRepository, InventoryRepository>();
 
+        return services;
+    }
+
+    internal static IServiceCollection AddInfrastructureConfigure(this IServiceCollection services, IConfiguration configuration)
+    {
+        var settings = configuration.GetSection(nameof(MongoDbSettings));
+        services.Configure<MongoDbSettings>(settings);
         return services;
     }
 
